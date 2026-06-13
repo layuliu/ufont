@@ -1,4 +1,4 @@
-# MicroPython uFont
+# MicroPython  uFont
 
 基于 [AntonVanke/MicroPython-uFont](https://github.com/AntonVanke/MicroPython-uFont) 的修改版本，用于在 MicroPython 中渲染位图字体。
 
@@ -24,6 +24,22 @@
 
 将 `ufont.py` 复制到 MicroPython 设备的文件系统即可。
 
+##已知限制
+纯 MicroPython 下，首次使用某个缩放比例（如 16→24）时，生成搬运表约需 18 ms（仅一次，之后会缓存）。
+
+若始终使用原始字号（font_size 等于字库大小），则完全不触发缩放，无此开销。
+
+满清空缓存策略在缓存容量设得过低时，可能导致频繁重建，略有抖动。
+
+
+仅测试了 ST7789 屏幕，其他屏幕未经完整验证。
+
+##贡献
+本项目是个人学习与修改的产物，欢迎提交 Issue 和 Pull Request，但请理解维护资源有限，响应可能较慢。
+
+##许可证
+基于原始 MIT 许可证修改，详见源仓库。
+
 ## 快速开始
 
 ```python
@@ -47,19 +63,3 @@ text(display, string, x, y, color=0xFFFF, bg_color=0, font_size=None, half_char=
 half_char=True 时 ASCII 字符占半宽；
 
 auto_wrap=True 时超出屏幕宽度自动换行。
-
-##已知限制
-纯 MicroPython 下，首次使用某个缩放比例（如 16→24）时，生成搬运表约需 18 ms（仅一次，之后会缓存）。
-
-若始终使用原始字号（font_size 等于字库大小），则完全不触发缩放，无此开销。
-
-满清空缓存策略在缓存容量设得过低时，可能导致频繁重建，略有抖动。
-
-
-仅测试了 ST7789 屏幕，其他屏幕未经完整验证。
-
-##贡献
-本项目是个人学习与修改的产物，欢迎提交 Issue 和 Pull Request，但请理解维护资源有限，响应可能较慢。
-
-##许可证
-基于原始 MIT 许可证修改，详见源仓库。
